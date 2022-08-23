@@ -6,6 +6,7 @@ body {
   font-size: 18px;
   font-family: Georgia, "Times New Roman", Times, serif;
   color: white;
+  font-style: italic;
 }
 
 .container {
@@ -15,11 +16,12 @@ body {
 .ancients-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
   position: relative;
   gap: 20px;
   min-width: 40%;
   padding: 20px;
+  margin-bottom: 50px;
 }
 
 .ancient-card {
@@ -39,6 +41,9 @@ body {
 
 .card1 {
   background-image: url("./assets/Ancients/Azathoth.png");
+  /* по умолчанию для новичка */
+  opacity: 1;
+  outline: 2px solid white;
 }
 
 .card-active {
@@ -59,6 +64,7 @@ body {
 
 .text-dif {
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .button {
@@ -67,16 +73,16 @@ body {
   height: 25px;
   border: none;
   border-radius: 5px;
-  opacity: 0.6;
 }
 
-.button-active {
+.button:active {
   opacity: 1;
   outline: 2px solid white;
 }
 
-.button:hover {
+.difficulty-level {
   opacity: 1;
+  outline: 2px solid white;
 }
 
 .container-app {
@@ -97,18 +103,62 @@ body {
   cursor: pointer;
 }
 .mix-card-button {
+  display: block;
+  margin: 0 auto;
   margin-bottom: 20px;
 }
-
-.choosen-card {
-  background-image: url("./assets/mythicCardBackground.png");
-}
-
-.mix-card {
-  margin-top: 30px;
-}
-
 .wrapper-card {
   display: flex;
   position: relative;
+}
+
+.stage-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.dots-container {
+  align-items: center;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.dot {
+  align-items: center;
+  border-radius: 50%;
+  display: flex;
+  height: 30px;
+  justify-content: center;
+  width: 30px;
+  background-color: aqua;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+.text-stage {
+  margin-bottom: 45px;
+}
+
+.stage-text {
+  margin-bottom: 5px;
+}
+
+.green {
+  background-color: rgba(0, 128, 0, 0.51);
+}
+
+.yellow {
+  background-color: rgba(246, 255, 0, 0.6);
+}
+
+.blue {
+  background-color: rgba(0, 0, 255, 0.341);
+}
+
+.hidden {
+  opacity: 0;
+  transition: ease 1s;
 }
