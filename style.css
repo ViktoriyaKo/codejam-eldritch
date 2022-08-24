@@ -75,6 +75,12 @@ body {
   border-radius: 5px;
 }
 
+.text-dif-js {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  border-radius: 5px;
+}
+
 .button:active {
   opacity: 1;
   outline: 2px solid white;
@@ -150,7 +156,7 @@ body {
   background-color: rgba(0, 128, 0, 0.51);
 }
 
-.yellow {
+.brown {
   background-color: rgba(246, 255, 0, 0.6);
 }
 

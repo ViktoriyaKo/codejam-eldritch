@@ -121,7 +121,7 @@ let blueThird = objBlue.slice(
   ancientsData[0].secondStage.blueCards + ancientsData[0].firstStage.blueCards,
   totalBlue
 );
-//соединяем неотфильтр массивы поэтапно:
+//соединяем неотфильтр массивы URL поэтапно:
 let totalFirst = greenFirst.concat(brownFirst, blueFirst);
 let totalSecond = greenSecond.concat(brownSecond, blueSecond);
 let totalThird = greenThird.concat(brownThird, blueThird);
@@ -149,7 +149,6 @@ function getGeneralArray() {
     console.log(count);
     chosenCard.style.backgroundImage = totalArrayUrl[count];
   } else {
-    chosenCard.style.backgroundImage = "none";
     backCard.style.backgroundImage = "none";
   }
 }
@@ -160,3 +159,84 @@ function hiddenButton() {
 }
 backCard.addEventListener("click", getGeneralArray);
 mixCard.addEventListener("click", hiddenButton);
+
+//Трекер:
+
+document.querySelector(".green1").textContent =
+  ancientsData[0].firstStage.greenCards;
+document.querySelector(".green2").textContent =
+  ancientsData[0].secondStage.greenCards;
+document.querySelector(".green3").textContent =
+  ancientsData[0].thirdStage.greenCards;
+document.querySelector(".blue1").textContent =
+  ancientsData[0].firstStage.blueCards;
+document.querySelector(".blue2").textContent =
+  ancientsData[0].secondStage.blueCards;
+document.querySelector(".blue3").textContent =
+  ancientsData[0].thirdStage.blueCards;
+document.querySelector(".brown1").textContent =
+  ancientsData[0].firstStage.brownCards;
+document.querySelector(".brown2").textContent =
+  ancientsData[0].secondStage.brownCards;
+document.querySelector(".brown3").textContent =
+  ancientsData[0].thirdStage.brownCards;
+
+function tracker() {
+  if (count < 4) {
+    document.querySelector(".first-stage").classList.add("text-dif-js");
+    if (totalArrayUrl[count].includes("brown")) {
+      console.log(totalArrayUrl[count]);
+      console.log("brown есть");
+      document.querySelector(".brown1").textContent =
+        document.querySelector(".brown1").textContent - 1;
+    } else if (totalArrayUrl[count].includes("green")) {
+      console.log(totalArrayUrl[count]);
+      console.log("green есть");
+      document.querySelector(".green1").textContent =
+        document.querySelector(".green1").textContent - 1;
+    } else {
+      console.log(totalArrayUrl[count]);
+      console.log("blue есть");
+      document.querySelector(".blue1").textContent =
+        document.querySelector(".blue1").textContent - 1;
+    }
+  }
+  if (count < 10 && count >= 4) {
+    document.querySelector(".first-stage").classList.remove("text-dif-js");
+    document.querySelector(".second-stage").classList.add("text-dif-js");
+
+    if (totalArrayUrl[count].includes("brown")) {
+      console.log("brown есть");
+      document.querySelector(".brown2").textContent =
+        document.querySelector(".brown2").textContent - 1;
+    } else if (totalArrayUrl[count].includes("green")) {
+      console.log("green есть");
+      document.querySelector(".green2").textContent =
+        document.querySelector(".green2").textContent - 1;
+    } else {
+      console.log("blue есть");
+      document.querySelector(".blue2").textContent =
+        document.querySelector(".blue2").textContent - 1;
+    }
+  }
+  if (count < 16 && count >= 10) {
+    document.querySelector(".first-stage").classList.remove("text-dif-js");
+    document.querySelector(".second-stage").classList.remove("text-dif-js");
+    document.querySelector(".third-stage").classList.add("text-dif-js");
+    if (totalArrayUrl[count].includes("brown")) {
+      console.log("brown есть");
+      document.querySelector(".brown3").textContent =
+        document.querySelector(".brown3").textContent - 1;
+    } else if (totalArrayUrl[count].includes("green")) {
+      console.log("green есть");
+      document.querySelector(".green3").textContent =
+        document.querySelector(".green3").textContent - 1;
+    } else {
+      console.log("blue есть");
+      document.querySelector(".blue3").textContent =
+        document.querySelector(".blue3").textContent - 1;
+    }
+  }
+}
+
+backCard.addEventListener("click", tracker);
