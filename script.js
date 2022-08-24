@@ -24,137 +24,139 @@ const totalBrown =
   ancientsData[0].secondStage.brownCards +
   ancientsData[0].thirdStage.brownCards;
 
-const totalCards = totalGreen + totalBlue + totalBrown;
-const totalFirst =
+//4
+const cardfirstStage =
+  ancientsData[0].firstStage.greenCards +
   ancientsData[0].firstStage.brownCards +
-  ancientsData[0].firstStage.blueCards +
-  ancientsData[0].firstStage.greenCards;
-// 2 значения массива blue
-function shakeCardBlue() {
-  //blue
+  ancientsData[0].firstStage.blueCards;
+//16 карт для каждого древнего для 3х этапов
+
+//сортировка массивов по цветам для всех карт!!!
+
+function shuffleArray(arr) {
+  return arr.sort(() => Math.random() - 0.5);
+}
+// green:
+let arrGreen = [];
+for (let i = 0; i < cardsDataGreen.length; i++) {
+  arrGreen.push(i);
+}
+//brown:
+let arrBrown = [];
+for (let i = 0; i < cardsDataBrown.length; i++) {
+  arrBrown.push(i);
+}
+//blue:
+let arrBlue = [];
+for (let i = 0; i < cardsDataBlue.length; i++) {
+  arrBlue.push(i);
+}
+
+//Обрезка массива для azathoth:
+let shuffleGreen = shuffleArray(arrGreen).slice(0, totalGreen);
+let shuffleBrown = shuffleArray(arrBrown).slice(0, totalBrown);
+let shuffleBlue = shuffleArray(arrBlue).slice(0, totalBlue);
+console.log("Обрезка массива для azathoth");
+console.log(shuffleGreen);
+// Массив в объект
+
+function getArraytoObjGreen() {
   let arr = [];
-  for (let i = 0; i < totalBlue; i++) {
-    let randomBlue = Math.floor(Math.random() * cardsDataBlue.length); // от 0
-    arr.push(cardsDataBlue[randomBlue]);
+  for (let i = 0; i < shuffleGreen.length; i++) {
+    arr.push(cardsDataGreen[shuffleGreen[i]].cardFace);
   }
-  console.log(arr);
   return arr;
 }
 
-// 5 значений массива green
-function shakeCardGreen() {
-  //green
+function getArraytoObjBlue() {
   let arr = [];
-  for (let i = 0; i < totalGreen; i++) {
-    let randomGreen = Math.floor(Math.random() * cardsDataGreen.length); // от 0
-    arr.push(cardsDataGreen[randomGreen]);
+  for (let i = 0; i < shuffleBlue.length; i++) {
+    arr.push(cardsDataBlue[shuffleBlue[i]].cardFace);
   }
-  console.log(arr);
   return arr;
 }
-// 9 значений массива green
-const shakeCardBrown = () => {
-  //green
+
+function getArraytoObjBrown() {
   let arr = [];
-  for (let i = 0; i < totalBrown; i++) {
-    let randomBrown = Math.floor(Math.random() * cardsDataBrown.length); // от 0
-    arr.push(cardsDataBrown[randomBrown]);
+  for (let i = 0; i < shuffleBrown.length; i++) {
+    arr.push(cardsDataBrown[shuffleBrown[i]].cardFace);
   }
-  console.log(arr);
   return arr;
-};
-let shakeCardBrownValue = shakeCardBrown();
-let shakeCardGreenValue = shakeCardGreen();
-let shakeCardBlueValue = shakeCardBlue();
-
-function hiddenButton() {
-  mixCard.classList.add("hidden");
-  document.querySelector(".text-change").textContent = "Возьмите карту:";
 }
 
-mixCard.addEventListener("click", shakeCardBlue);
-mixCard.addEventListener("click", shakeCardGreen);
-mixCard.addEventListener("click", shakeCardBrown);
-mixCard.addEventListener("click", hiddenButton);
+let objBrown = getArraytoObjBrown();
+let objBlue = getArraytoObjBlue();
+let objGreen = getArraytoObjGreen();
+console.log("Перевод из массива в url");
+console.log(objGreen);
 
-function getFirst() {
-  //   green
-  let arr = [];
-  for (let i = 0; i < ancientsData[0].firstStage.greenCards; i++) {
-    arr.push(shakeCardGreenValue[i]);
-  }
-  let arr2 = [];
-  for (let i = 0; i < ancientsData[0].firstStage.blueCards; i++) {
-    arr2.push(shakeCardBlueValue[i]);
-  }
-  let arr3 = [];
-  for (let i = 0; i < ancientsData[0].firstStage.brownCards; i++) {
-    arr3.push(shakeCardBrownValue[i]);
-  }
-  let res = arr.concat(arr2, arr3);
-  //случайная сортировка!!!
-  return res.sort(() => Math.random() - 0.5);
+let greenFirst = objGreen.slice(0, ancientsData[0].firstStage.greenCards);
+let brownFirst = objBrown.slice(0, ancientsData[0].firstStage.brownCards);
+let blueFirst = objBlue.slice(0, ancientsData[0].firstStage.blueCards);
+
+let greenSecond = objGreen.slice(
+  ancientsData[0].firstStage.greenCards,
+  ancientsData[0].secondStage.greenCards + ancientsData[0].firstStage.greenCards
+);
+let brownSecond = objBrown.slice(
+  ancientsData[0].firstStage.brownCards,
+  ancientsData[0].secondStage.brownCards + ancientsData[0].firstStage.brownCards
+);
+let blueSecond = objBlue.slice(
+  ancientsData[0].firstStage.blueCards,
+  ancientsData[0].secondStage.blueCards + ancientsData[0].firstStage.blueCards
+);
+
+let greenThird = objGreen.slice(
+  ancientsData[0].secondStage.greenCards +
+    ancientsData[0].firstStage.greenCards,
+  totalGreen
+);
+let brownThird = objBrown.slice(
+  ancientsData[0].secondStage.brownCards +
+    ancientsData[0].firstStage.brownCards,
+  totalBrown
+);
+let blueThird = objBlue.slice(
+  ancientsData[0].secondStage.blueCards + ancientsData[0].firstStage.blueCards,
+  totalBlue
+);
+//соединяем неотфильтр массивы поэтапно:
+let totalFirst = greenFirst.concat(brownFirst, blueFirst);
+let totalSecond = greenSecond.concat(brownSecond, blueSecond);
+let totalThird = greenThird.concat(brownThird, blueThird);
+
+//фильтруем поэтапно:
+function randomArrayUrl(array) {
+  array.sort(() => Math.random() - 0.5);
+  console.log(array);
+  return array;
 }
+console.log("сортировка url");
+let randomArrayF = randomArrayUrl(totalFirst);
+let randomArrayS = randomArrayUrl(totalSecond);
+let randomArrayTh = randomArrayUrl(totalThird);
 
-function getSecond() {
-  //   green
-  let arr = [];
-  for (let i = 0; i < ancientsData[0].secondStage.greenCards; i++) {
-    arr.push(shakeCardGreenValue[i]);
-  }
-  let arr2 = [];
-  for (let i = 0; i < ancientsData[0].secondStage.blueCards; i++) {
-    arr2.push(shakeCardBlueValue[i]);
-  }
-  let arr3 = [];
-  for (let i = 0; i < ancientsData[0].secondStage.brownCards; i++) {
-    arr3.push(shakeCardBrownValue[i]);
-  }
-  let res = arr.concat(arr2, arr3);
+//получаем общий массив url для всех этапов:
+let totalArrayUrl = randomArrayF.concat(randomArrayS, randomArrayTh);
+console.log("сортированный массив url для трех этапов");
+console.log(totalArrayUrl);
 
-  //случайная сортировка!!!
-
-  return res.sort(() => Math.random() - 0.5);
-}
-
-function getThird() {
-  //   green
-  let arr = [];
-  for (let i = 0; i < ancientsData[0].thirdStage.greenCards; i++) {
-    arr.push(shakeCardGreenValue[i]);
-  }
-  let arr2 = [];
-  for (let i = 0; i < ancientsData[0].thirdStage.blueCards; i++) {
-    arr2.push(shakeCardBlueValue[i]);
-  }
-  let arr3 = [];
-  for (let i = 0; i < ancientsData[0].thirdStage.brownCards; i++) {
-    arr3.push(shakeCardBrownValue[i]);
-  }
-  let res = arr.concat(arr2, arr3);
-  //случайная сортировка!!!
-
-  return res.sort(() => Math.random() - 0.5);
-}
-
-const getFirstValue = getFirst();
-const getSecondValue = getSecond();
-const getThirdValue = getThird();
-function sumArray() {
-  console.log(getFirstValue.concat(getSecondValue, getThirdValue));
-  return getFirstValue.concat(getSecondValue, getThirdValue);
-}
-let sumArrayValue = sumArray();
-let count = 0;
-function countCard() {
-  if (count < totalCards) {
-    console.log(sumArrayValue[count]);
+let count = -1;
+function getGeneralArray() {
+  count++;
+  if (count < 16) {
     console.log(count);
-    chosenCard.style.backgroundImage = sumArrayValue[count].cardFace;
-    count++;
+    chosenCard.style.backgroundImage = totalArrayUrl[count];
   } else {
     chosenCard.style.backgroundImage = "none";
     backCard.style.backgroundImage = "none";
   }
 }
-backCard.addEventListener("click", countCard);
+
+function hiddenButton() {
+  mixCard.classList.add("hidden");
+  document.querySelector(".text-change").textContent = "Возьмите карту:";
+}
+backCard.addEventListener("click", getGeneralArray);
+mixCard.addEventListener("click", hiddenButton);
