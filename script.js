@@ -272,24 +272,24 @@ document
   .querySelector(".ancients-container")
   .addEventListener("click", (element) => {
     if (element.target.closest(".card1")) {
-      card2.classList.add("hidden");
-      card3.classList.add("hidden");
-      card4.classList.add("hidden");
+      card2.style.opacity = "0";
+      card3.style.opacity = "0";
+      card4.style.opacity = "0";
       card1.classList.add("card-active");
     } else if (element.target.closest(".card2")) {
-      card1.classList.add("hidden");
-      card3.classList.add("hidden");
-      card4.classList.add("hidden");
+      card1.style.opacity = "0";
+      card3.style.opacity = "0";
+      card4.style.opacity = "0";
       card2.classList.add("card-active");
     } else if (element.target.closest(".card3")) {
-      card1.classList.add("hidden");
-      card2.classList.add("hidden");
-      card4.classList.add("hidden");
+      card1.style.opacity = "0";
+      card2.style.opacity = "0";
+      card4.style.opacity = "0";
       card3.classList.add("card-active");
     } else if (element.target.closest(".card4")) {
-      card1.classList.add("hidden");
-      card2.classList.add("hidden");
-      card3.classList.add("hidden");
+      card1.style.opacity = "0";
+      card2.style.opacity = "0";
+      card3.style.opacity = "0";
       card4.classList.add("card-active");
     }
   });
