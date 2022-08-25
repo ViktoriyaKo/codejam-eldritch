@@ -251,16 +251,10 @@ function getAzat(value1) {
       }
     }
   }
-  this.classList.add("card-active");
+
   backCard.addEventListener("click", tracker);
 }
-function cardActive() {
-  this.classList.add("card-active");
-}
 
-document.querySelector(".card2").onclick = cardActive;
-document.querySelector(".card3").onclick = cardActive;
-document.querySelector(".card4").onclick = cardActive;
 let card1 = document.querySelector(".card1");
 let card2 = document.querySelector(".card2");
 let card3 = document.querySelector(".card3");
@@ -273,3 +267,29 @@ card1.onclick = getAncients1;
 card2.onclick = getAncients2;
 card3.onclick = getAncients3;
 card4.onclick = getAncients4;
+
+document
+  .querySelector(".ancients-container")
+  .addEventListener("click", (element) => {
+    if (element.target.closest(".card1")) {
+      card2.classList.add("hidden");
+      card3.classList.add("hidden");
+      card4.classList.add("hidden");
+      card1.classList.add("card-active");
+    } else if (element.target.closest(".card2")) {
+      card1.classList.add("hidden");
+      card3.classList.add("hidden");
+      card4.classList.add("hidden");
+      card2.classList.add("card-active");
+    } else if (element.target.closest(".card3")) {
+      card1.classList.add("hidden");
+      card2.classList.add("hidden");
+      card4.classList.add("hidden");
+      card3.classList.add("card-active");
+    } else if (element.target.closest(".card4")) {
+      card1.classList.add("hidden");
+      card2.classList.add("hidden");
+      card3.classList.add("hidden");
+      card4.classList.add("card-active");
+    }
+  });
